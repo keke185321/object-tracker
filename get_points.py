@@ -49,18 +49,18 @@ def run(im, multi=False):
         # Display the cropped images
         cv2.namedWindow(window_name_2, cv2.WINDOW_NORMAL)
         cv2.imshow(window_name_2, im_disp)
-        key = cv2.waitKey(30)
-        if key == ord('p'):
+        key = cv2.waitKey(10) & 255
+        if chr(key) == "p":
             # Press key `s` to return the selected points
             cv2.destroyAllWindows()
             point= [(tl + br) for tl, br in zip(pts_1, pts_2)]
             corrected_point=check_point(point)
             return corrected_point
-        elif key == ord('q'):
+        elif chr(key) == "q":
             # Press key `q` to quit the program
             print "Quitting without saving."
             exit()
-        elif key == ord('d'):
+        elif chr(key) == "d":
             # Press ket `d` to delete the last rectangular region
             if run.mouse_down == False and pts_1:
                 print "Object deleted at  [{}, {}]".format(pts_1[-1], pts_2[-1])

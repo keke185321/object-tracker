@@ -4,6 +4,7 @@ import cv2
 import argparse as ap
 import get_points
 
+
 def run(source=0, dispLoc=False):
     # Create the VideoCapture object
     cam = cv2.VideoCapture(source)
@@ -17,10 +18,15 @@ def run(source=0, dispLoc=False):
     while True:
         # Retrieve an image and Display it.
         retval, img = cam.read()
+	
         if not retval:
             print "Cannot capture frame device"
             exit()
-        if(cv2.waitKey(10)==ord('p')):
+	pressed = cv2.waitKey(10) & 255
+	if pressed == 27:  # exit program on 'esc'
+            print("Exiting")
+	if chr(pressed) == "p":
+            print 'key p pressed'
             break
         cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
         cv2.imshow("Image", img)
